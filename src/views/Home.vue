@@ -22,7 +22,7 @@
       :min="2"
     />
     <ClassSuffixInputNumber />
-
+    <DateCompleted />
     
   </section>
 </template>
@@ -44,4 +44,5 @@ import Scopes from "@/components/Scopes.vue";
 import XrayScanTextArea from "@/components/XrayScanTextArea.vue";
 import NumberInput from "@/components/NumberInput.vue";
 import ClassSuffixInputNumber from "@/components/ClassSuffixInputNumber.vue";
+import DateCompleted from "@/components/DateCompleted.vue";
 </script>

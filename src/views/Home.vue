@@ -23,7 +23,7 @@
     />
     <ClassSuffixInputNumber />
     <DateCompleted />
-    
+    <DateWithMacros />
   </section>
 </template>
 
@@ -45,4 +45,5 @@ import XrayScanTextArea from "@/components/XrayScanTextArea.vue";
 import NumberInput from "@/components/NumberInput.vue";
 import ClassSuffixInputNumber from "@/components/ClassSuffixInputNumber.vue";
 import DateCompleted from "@/components/DateCompleted.vue";
+import DateWithMacros from "@/components/DateWithMacros.vue";
 </script>

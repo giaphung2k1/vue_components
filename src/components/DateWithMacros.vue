@@ -21,22 +21,52 @@
   
 </template>
 <script setup lang="ts">
-import dayjs from 'dayjs';
 import { ref } from 'vue';
 
 const date = ref<string>("")
 
 const DATE_FORMAT = "DD/MM/YYYY"
 
+const dayToMs = 24 * 60 * 60 * 1000
+
+const DATE_UNIT_TO_MS = {
+  "day": dayToMs,
+  "week": 7 * dayToMs,
+  "month": 30 * dayToMs,
+}
+
+const dateRegex = /^\d{2}\/\d{2}\/\d{4,}$/
+
+const isValidDate = (date: string) => {
+  return dateRegex.test(date)
+}
+
+const formatNumberInDate = (num: number) => {
+  if (0 < num && num < 10) {
+    return "0" + num
+  }
+  return num
+}
+
+const formatDate = (date: Date | number | string) => {
+  const dateObj = new Date(date)
+  const dateOfMonth = formatNumberInDate(dateObj.getDate())
+  const month = formatNumberInDate(dateObj.getMonth() + 1)
+  const year = formatNumberInDate(dateObj.getFullYear())
+  return [dateOfMonth, month, year].join("/")
+
+}
+
 const getCountedDateValue = (inputValue: string, type: "day" | "week" | "month") => {
   const isAdd = inputValue.includes("+")
   const spliter = isAdd ? "+" : "-"
   const valueCount = inputValue.split(spliter)[1] || 0
   const dateCount = isNaN(Number(valueCount)) ? 0 : Number(valueCount)
+  const msCount = DATE_UNIT_TO_MS[type] * dateCount
   if (isAdd) {
-    return dayjs().add(dateCount, type).format(DATE_FORMAT)
+    return formatDate(Date.now() + msCount)
   }
-  return dayjs().subtract(dateCount, type).format(DATE_FORMAT)
+  return formatDate(Date.now() - msCount)
 }
 
 const handleFocus = (isFocus: boolean) => {
@@ -53,9 +83,8 @@ const handleFocus = (isFocus: boolean) => {
       date.value = getCountedDateValue(date.value, "month")
       return;
     }
-    if (dayjs(date.value, DATE_FORMAT).isValid()) {
-      date.value = dayjs(date.value, DATE_FORMAT).format(DATE_FORMAT)
-      return
+    if (isValidDate(date.value)) {
+      return;
     }
     date.value = ""
   }

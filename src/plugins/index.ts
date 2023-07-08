@@ -8,7 +8,6 @@
 import { loadFonts } from './webfontloader'
 import vuetify from './vuetify'
 import router from '../router'
-import "./dayjs"
 
 // Types
 import type { App } from 'vue'

@@ -22,17 +22,21 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
+type Spliter = "/" | "-"
 
 const date = ref<string>("")
 
 const lastDate = ref<string>("")
 
-const DATE_FORMAT = "DD/MM/YYYY"
+const DATE_FORMAT = "MM/DD/YYYY"
 
-const dateRegex = /^\d{2}\/\d{2}\/\d{4,}$/
+const dateRegexWithSlash = /^\d{2}\/\d{2}\/\d{4,}$/
+
+// eslint-disable-next-line no-useless-escape
+const dateRegexWithDash = /^\d{2}\-\d{2}\-\d{4,}$/
 
 const isValidDate = (date: string) => {
-  return dateRegex.test(date)
+  return dateRegexWithSlash.test(date) || dateRegexWithDash.test(date)
 }
 
 const formatNumberInDate = (num: number) => {
@@ -42,29 +46,42 @@ const formatNumberInDate = (num: number) => {
   return num
 }
 
-const formatDate = (date: Date | number | string) => {
+const formatDate = (date: Date | number | string, spliter: Spliter) => {
   const dateObj = new Date(date)
   const dateOfMonth = formatNumberInDate(dateObj.getDate())
   const month = formatNumberInDate(dateObj.getMonth() + 1)
   const year = formatNumberInDate(dateObj.getFullYear())
-  return [dateOfMonth, month, year].join("/")
+  return [month, dateOfMonth, year].join(spliter)
 }
 
 const getMonthYearDateFromInput = (inputValue: string) => {
-  const [date, month, year] = inputValue.split("/").map(Number)
+  let spliter:Spliter = "/"
+  const isSlash = dateRegexWithSlash.test(inputValue)
+  const isDash = dateRegexWithDash.test(inputValue)
+
+  if (isSlash) {
+    spliter = "/"
+  }
+
+  if (isDash) {
+    spliter = "-"
+  }
+  const [month, date, year] = inputValue.split(spliter).map(Number)
+
   return {
     date,
     month,
-    year
+    year,
+    spliter
   } 
 }
 
 const getCountedDateValue = (inputValue: string, type: "day" | "week" | "month", start: string) => {
   const isAdd = inputValue.includes("+")
-  const spliter = isAdd ? "+" : "-"
-  const valueCount = inputValue.split(spliter)[1] || 0
+  const sign = isAdd ? "+" : "-"
+  const valueCount = inputValue.split(sign)[1] || 0
   const dateCount = isNaN(Number(valueCount)) ? 0 : Number(valueCount)
-  let { date, month, year } = getMonthYearDateFromInput(start)
+  let { date, month, year, spliter } = getMonthYearDateFromInput(start)
 
   if (type === "day") {
     date = isAdd ? date + dateCount : date - dateCount
@@ -78,14 +95,14 @@ const getCountedDateValue = (inputValue: string, type: "day" | "week" | "month",
     month = isAdd ? month + dateCount : month - dateCount
   }
 
-  return formatDate(new Date(year, month - 1, date))
+  return formatDate(new Date(year, month - 1, date), spliter)
 }
 
 
 const handleFocus = (isFocus: boolean) => {
   if (!isFocus) {
     let result = ""
-    const start = lastDate.value ? lastDate.value : formatDate(new Date())
+    const start = lastDate.value ? lastDate.value : formatDate(new Date(), "/")
     if (/d([+-]\d+)?/gi.test(date.value)) {
       result = getCountedDateValue(date.value, "day", start)
     }

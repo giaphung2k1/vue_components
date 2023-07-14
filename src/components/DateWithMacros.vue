@@ -141,16 +141,10 @@ const dateRule = [
     }
     if (isValidDateString(value)) {
       const { date, month, year } = getMonthYearDateFromInput(value)
-      if (validValues.includes(month)) {
-        if (isValidDay(date)) {
-          return true
-        }
+      if (validValues.includes(month) && !isValidDay(date)) {
         return "Invalid Date"
       }
-      if (validValues.includes(date)) {
-        if (isValidMonth(month)) {
-          return true
-        }
+      if (validValues.includes(date) && !isValidMonth(month)) {
         return "Invalid Date"
       }
       const maxDayInMonth = new Date(year, month, 0).getDate()

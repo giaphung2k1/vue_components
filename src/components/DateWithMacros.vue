@@ -1,6 +1,7 @@
 
 <template>
-  <v-container>
+  <v-form v-model="valid">
+    <v-container>
       <v-label class="lookup-label">
         Date with macros
       </v-label>
@@ -12,17 +13,20 @@
                 variant="outlined"
                 color="on_green"
                 :placeholder=DATE_FORMAT.toLocaleLowerCase()
+                :rules="dateRule"
                 @update:focused="handleFocus"
               />
             </v-responsive>
         </v-col>
       </v-row>
     </v-container>
-  
+  </v-form>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
 type Spliter = "/" | "-"
+
+const valid = ref<boolean>(false)
 
 const date = ref<string>("")
 
@@ -30,12 +34,12 @@ const lastDate = ref<string>("")
 
 const DATE_FORMAT = "MM/DD/YYYY"
 
-const dateRegexWithSlash = /^\d{2}\/\d{2}\/\d{4,}$/
+const dateRegexWithSlash = /^\d{1,2}\/\d{1,2}\/\d{4,}$/
 
 // eslint-disable-next-line no-useless-escape
-const dateRegexWithDash = /^\d{2}\-\d{2}\-\d{4,}$/
+const dateRegexWithDash = /^\d{1,2}\-\d{1,2}\-\d{4,}$/
 
-const isValidDate = (date: string) => {
+const isValidDateString = (date: string) => {
   return dateRegexWithSlash.test(date) || dateRegexWithDash.test(date)
 }
 
@@ -112,12 +116,51 @@ const handleFocus = (isFocus: boolean) => {
     if (/m([+-]\d+)?/gi.test(date.value)) {
       result = getCountedDateValue(date.value, "month", start)
     }
-    if (isValidDate(date.value)) {
+    if (isValidDateString(date.value)) {
       result = date.value
     }
     lastDate.value = result
     date.value = result
   }
 }
+
+const validValues = [0, 99]
+
+const isValidMonth = (month: number) => {
+  return (month <= 12 && month > 0) || validValues.includes(month)
+}
+
+const isValidDay = (day: number, maxDay: number = 31) => {
+  return (day <= maxDay && day > 0) || validValues.includes(day)
+}
+
+const dateRule = [
+  (value: string | null | undefined) => {
+    if (!value) {
+      return true
+    }
+    if (isValidDateString(value)) {
+      const { date, month, year } = getMonthYearDateFromInput(value)
+      if (validValues.includes(month)) {
+        if (isValidDay(date)) {
+          return true
+        }
+        return "Invalid Date"
+      }
+      if (validValues.includes(date)) {
+        if (isValidMonth(month)) {
+          return true
+        }
+        return "Invalid Date"
+      }
+      const maxDayInMonth = new Date(year, month, 0).getDate()
+      if (!isValidMonth(month) || !isValidDay(date, maxDayInMonth)) {
+        return "Invalid Date"
+      }
+      return true
+    }
+    return true
+  },
+]
 
 </script>

@@ -24,7 +24,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-type Spliter = "/" | "-"
+type Spliter = "/" | "-" | ""
 
 const valid = ref<boolean>(false)
 
@@ -34,13 +34,25 @@ const lastDate = ref<string>("")
 
 const DATE_FORMAT = "MM/DD/YYYY"
 
-const dateRegexWithSlash = /^\d{1,2}\/\d{1,2}\/\d{4,}$/
+const dateRegexWithSlash = /^\d{1,2}\/\d{1,2}\/\d{4}$/
+
+const shortDateRegexWithSlash = /^\d{1,2}\/\d{1,2}\/\d{2}$/
 
 // eslint-disable-next-line no-useless-escape
-const dateRegexWithDash = /^\d{1,2}\-\d{1,2}\-\d{4,}$/
+const dateRegexWithDash = /^\d{1,2}\-\d{1,2}\-\d{4}$/
+
+// eslint-disable-next-line no-useless-escape
+const shortDateRegexWithDash = /^\d{1,2}\-\d{1,2}\-\d{2}$/
+
+
+const dateWithoutSpliter = /^(\d{2})(\d{2})(\d{4})$/
 
 const isValidDateString = (date: string) => {
-  return dateRegexWithSlash.test(date) || dateRegexWithDash.test(date)
+  return dateRegexWithSlash.test(date) ||
+    dateRegexWithDash.test(date) ||
+    shortDateRegexWithDash.test(date) ||
+    shortDateRegexWithSlash.test(date) ||
+    dateWithoutSpliter.test(date)
 }
 
 const formatNumberInDate = (num: number) => {
@@ -58,19 +70,35 @@ const formatDate = (date: Date | number | string, spliter: Spliter) => {
   return [month, dateOfMonth, year].join(spliter)
 }
 
+const formatDateWithDateMonthYear = (year: string | number, month: string | number, date: string | number, spliter: Spliter) => {
+  const formatedDate = formatNumberInDate(Number(date))
+  const formatedMonth = formatNumberInDate(Number(month))
+  const formatedYear = formatNumberInDate(Number(year))
+  return [formatedMonth, formatedDate, formatedYear].join(spliter)
+}
+
 const getMonthYearDateFromInput = (inputValue: string) => {
-  let spliter:Spliter = "/"
-  const isSlash = dateRegexWithSlash.test(inputValue)
-  const isDash = dateRegexWithDash.test(inputValue)
+  let spliter:Spliter = ""
+  let month, date, year
 
-  if (isSlash) {
-    spliter = "/"
+  if (dateRegexWithSlash.test(inputValue) || shortDateRegexWithSlash.test(inputValue)) {
+    spliter = "/";
+    [month, date, year] = inputValue.split("/").map(Number)
+    if (shortDateRegexWithSlash.test(inputValue)) {
+      year = Number("20" + year)
+    }
   }
+  if (dateRegexWithDash.test(inputValue) || shortDateRegexWithDash.test(inputValue)) {
+    spliter = "-";
+    [month, date, year] = inputValue.split("-").map(Number)
+    if (shortDateRegexWithDash.test(inputValue)) {
+      year = Number("20" + year)
+    }
+  } 
 
-  if (isDash) {
-    spliter = "-"
+  if (dateWithoutSpliter.test(inputValue)) {
+    [, month, date, year] = inputValue.match(dateWithoutSpliter);
   }
-  const [month, date, year] = inputValue.split(spliter).map(Number)
 
   return {
     date,
@@ -78,6 +106,11 @@ const getMonthYearDateFromInput = (inputValue: string) => {
     year,
     spliter
   } 
+}
+
+const formatDateFromInput = (inputValue: string) => {
+  const { month, date, year } = getMonthYearDateFromInput(inputValue)
+  return formatDateWithDateMonthYear(year, month, date, "/");
 }
 
 const getCountedDateValue = (inputValue: string, type: "day" | "week" | "month", start: string) => {
@@ -99,7 +132,7 @@ const getCountedDateValue = (inputValue: string, type: "day" | "week" | "month",
     month = isAdd ? month + dateCount : month - dateCount
   }
 
-  return formatDate(new Date(year, month - 1, date), spliter)
+  return formatDateWithDateMonthYear(year, month, date, spliter)
 }
 
 
@@ -117,7 +150,7 @@ const handleFocus = (isFocus: boolean) => {
       result = getCountedDateValue(date.value, "month", start)
     }
     if (isValidDateString(date.value)) {
-      result = date.value
+      result = formatDateFromInput(date.value)
     }
     lastDate.value = result
     date.value = result

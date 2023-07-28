@@ -211,6 +211,11 @@
     margin-bottom: 12px;
     color: #00695c;
 }
+.checkbox-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #00695c;
+}
 .text-field-wrapper {
     margin-inline-end: auto;
     max-width: 60% !important;

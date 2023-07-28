@@ -24,6 +24,7 @@
     <ClassSuffixInputNumber />
     <DateCompleted />
     <DateWithMacros />
+    <Checkbox />
   </section>
 </template>
 
@@ -46,4 +47,5 @@ import NumberInput from "@/components/NumberInput.vue";
 import ClassSuffixInputNumber from "@/components/ClassSuffixInputNumber.vue";
 import DateCompleted from "@/components/DateCompleted.vue";
 import DateWithMacros from "@/components/DateWithMacros.vue";
+import Checkbox from "@/components/Checkbox.vue";
 </script>

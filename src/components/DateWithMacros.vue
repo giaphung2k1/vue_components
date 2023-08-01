@@ -311,7 +311,7 @@ const handleFocus = (isFocus: boolean) => {
 /**
  * The array of special date values
  */
-const validValues = [0, 99]
+const validValues = [0, 99, 88]
 
 
 /**

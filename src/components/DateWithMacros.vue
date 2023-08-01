@@ -286,7 +286,7 @@ const getCountedDateValue = (inputValue: string, start: string) => {
     month = isAdd ? month + dateCount : month - dateCount
   }
 
-  return formatDateWithDateMonthYear(year, month, date, spliter)
+  return formatDate(new Date(year, month - 1, date), "/")
 }
 
 /**

@@ -25,6 +25,7 @@
     <DateCompleted />
     <DateWithMacros />
     <Checkbox />
+    <TypeOfInfoPending />
   </section>
 </template>
 
@@ -48,4 +49,5 @@ import ClassSuffixInputNumber from "@/components/ClassSuffixInputNumber.vue";
 import DateCompleted from "@/components/DateCompleted.vue";
 import DateWithMacros from "@/components/DateWithMacros.vue";
 import Checkbox from "@/components/Checkbox.vue";
+import TypeOfInfoPending from "@/components/TypeOfInfoPending.vue";
 </script>

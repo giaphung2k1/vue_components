@@ -12,6 +12,7 @@ import {
   DoctorColumn,
   Race,
   ClassSuffix,
+  TypeOfInfoPending,
 } from "@/types/dataTypes";
 
 const OWALookupData: Array<OWAItem> = [
@@ -367,4 +368,37 @@ const classSuffixs: ClassSuffix[] = [
   },
 ]
 
-export { OWALookupData, facilities, fakeStateData, headers, countries, doctors, columnsDoctor, columnsAgent, displayedColumnsAgent, columnsFacility, races, classSuffixs };
+const typesOfInfoPeding: TypeOfInfoPending[] = [
+  {
+    title: "Staging",
+    value: "staging",
+    props: { color:'on_green' }
+  },
+  {
+    title: "Biopsy info",
+    value: "biopsy",
+    props: { color:'on_green' }
+  },
+  {
+    title: "Surgery",
+    value: "surgery",
+    props: { color:'on_green' }
+  },
+  {
+    title: "Chemotherapy Info",
+    value: "chemotherapy",
+    props: { color:'on_green' }
+  },
+  {
+    title: "Radiation Info",
+    value: "radiation",
+    props: { color:'on_green' }
+  },
+  {
+    title: "Home Therapy Info",
+    value: "home-therapy",
+    props: { color:'on_green' }
+  },
+];
+
+export { OWALookupData, facilities, fakeStateData, headers, countries, doctors, columnsDoctor, columnsAgent, displayedColumnsAgent, columnsFacility, races, classSuffixs, typesOfInfoPeding };

@@ -104,3 +104,9 @@ export interface ClassSuffix {
   title: string,
   value: string,
 }
+
+export interface TypeOfInfoPending {
+  title: string,
+  value: string,
+  props?: { color?: string }
+}

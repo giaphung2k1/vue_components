@@ -402,6 +402,30 @@
     left: 50%;
 }
 
+.select-action {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    margin-top: 10px;
+}
 
+.select-action .button-done {
+    min-width: 100px;
+    height: 36px;
+    text-transform: capitalize;
+    background-color: #fbc02d;
+    color: #000000;
+}
 
+.type-of-info-pending {
+    width: 60%;
+}
 
+.type-of-info-pending .v-field__input {
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+.type-of-info-pending:hover, .v-select--active-menu.type-of-info-pending {
+    min-width: 60%;
+    width: fit-content;
+}

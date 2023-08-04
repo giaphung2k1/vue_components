@@ -12,7 +12,11 @@
                 v-model="date"
                 persistent-hint
                 variant="outlined"
+                class="field-with-green-place-holder"
                 color="on_green"
+                :class="{
+                  'green-text': !date
+                }"
               />
             </v-responsive>
         </v-col>

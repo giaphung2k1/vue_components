@@ -35,6 +35,11 @@ export default createVuetify({
   },
   icons: {
     defaultSet: 'mdi',
+    aliases: {
+      checkboxOff: "custom:rounded-uncheckbox",
+      checkboxOn: "custom:rounded-checkbox",
+      checkboxIndeterminate:  "custom:rounded-checkbox",
+    },
     sets: {
       fa,
       mdi,

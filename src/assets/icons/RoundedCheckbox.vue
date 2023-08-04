@@ -1,0 +1,42 @@
+<template>
+  <svg
+    fill="#ffffff"
+    version="1.1"
+    id="Capa_1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="64px"
+    height="64px"
+    viewBox="-206.69 -206.69 818.65 818.65"
+    xml:space="preserve"
+    stroke="#ffffff"
+  >
+    <g
+      id="SVGRepo_bgCarrier"
+      stroke-width="0"
+      transform="translate(62.81716,62.81716), scale(0.69)"
+    >
+      <rect
+        x="-206.69"
+        y="-206.69"
+        width="818.65"
+        height="818.65"
+        rx="163.73"
+        fill="#00695c"
+        strokewidth="0"
+      ></rect>
+    </g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+      <g>
+        <path
+          d="M393.401,124.425L179.603,338.208c-15.832,15.835-41.514,15.835-57.361,0L11.878,227.836 c-15.838-15.835-15.838-41.52,0-57.358c15.841-15.841,41.521-15.841,57.355-0.006l81.698,81.699L336.037,67.064 c15.841-15.841,41.523-15.829,57.358,0C409.23,82.902,409.23,108.578,393.401,124.425z"
+        ></path>
+      </g>
+    </g>
+  </svg>
+</template>

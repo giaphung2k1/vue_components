@@ -1,3 +1,5 @@
+import { IHospital } from "./backendTypes";
+
 export interface OWAItem {
   id: string;
   description: string;
@@ -82,6 +84,10 @@ export interface AgentColumn extends Column {
 
 export interface FacilityColumn extends Column {
   key: keyof Facility
+}
+
+export interface HospitalColumn extends Column {
+  key: keyof IHospital
 }
 
 export interface Country {

@@ -1,6 +1,7 @@
 <template>
   <section :style="{paddingBottom: '44px'}">
     <FacilityLockup />
+    <HospitalLookup />
     <OWALookup />
     <DoctorLookup />
     <AgentLookup />
@@ -50,4 +51,5 @@ import DateCompleted from "@/components/DateCompleted.vue";
 import DateWithMacros from "@/components/DateWithMacros.vue";
 import Checkbox from "@/components/Checkbox.vue";
 import TypeOfInfoPending from "@/components/TypeOfInfoPending.vue";
+import HospitalLookup from "@/components/HospitalLookup.vue";
 </script>

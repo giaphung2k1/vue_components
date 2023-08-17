@@ -1,8 +1,6 @@
 <template>
   <v-container>
-    <v-label class="lookup-label">
-      Facility
-    </v-label>
+    <v-label class="lookup-label"> Hospitals </v-label>
     <v-row>
       <v-col>
         <div class="table-dropdown-wrapper">
@@ -19,7 +17,7 @@
             >
               <template v-slot:append-inner>
                 <!-- modal -->
-                <Modal title="Facility" @on-submit="handleSubmit" />
+                <Modal title="Hospital" @on-submit="handleSubmit" />
               </template>
             </v-text-field>
           </v-responsive>
@@ -39,26 +37,30 @@
               </tr>
             </thead>
             <tbody>
-              <template 
-                v-if="filteredData.length > 0">
+              <template v-if="filteredData.length > 0">
                 <tr
-                  v-for="facility in filteredData"
-                  :key="facility.id"
-                  @click="handleSelectItem(facility.stateCod,facility.hospitalName)"
+                  v-for="hospital in filteredData"
+                  :key="hospital.hospitalName"
+                  @click="
+                    handleSelectItem(hospital.pincode, hospital.hospitalName)
+                  "
                 >
                   <td
-                    v-for="column in columnsFacility"
+                    v-for="column in columnsHospital"
                     :key="column.key"
                     :class="column.class"
                   >
-                    {{ facility[column.key] }}
+                    {{ hospital[column.key] }}
                   </td>
                 </tr>
               </template>
             </tbody>
           </v-table>
           <!-- no results -->
-          <div v-if="filteredData.length === 0 && !isSelected" class="no-result">
+          <div
+            v-if="filteredData.length === 0 && !isSelected"
+            class="no-result"
+          >
             <span class="table-text">No result</span>
           </div>
         </div>
@@ -69,56 +71,49 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { facilities, columnsFacility } from "@/list/data";
+import { ref } from "vue";
+import { columnsFacility, columnsHospital } from "@/list/data";
 import Modal from "./Modal.vue";
 import { Facility } from "@/types/dataTypes";
+import { hospitalsListTest } from "@/list/backendData";
+import { IHospital } from "@/types/backendTypes";
 
 const lookupInputRef = ref<HTMLInputElement | null>(null);
+const timeoutSearch = ref<ReturnType<typeof setTimeout> | null>(null);
 const lookupValue = ref("");
-const facilitiesData = ref(facilities);
+const filteredData = ref<IHospital[]>(hospitalsListTest);
 
 const isSelected = ref(false);
 
 const handleInput = (e: Event) => {
   isSelected.value = false;
+  if (timeoutSearch.value) {
+    clearTimeout(timeoutSearch.value);
+  }
+  timeoutSearch.value = setTimeout(() => {
+    const target = e.target as HTMLInputElement;
+    const value = target.value
+    //search for hospital here
+    if (!value) {
+      filteredData.value = hospitalsListTest
+      return
+    }
+    const hospital = hospitalsListTest.filter((item) =>
+      item.hospitalName.includes(value)
+    );
+    filteredData.value = hospital || [];
+    console.log(filteredData.value);
+  }, 500);
 };
 
-const handleSelectItem = (stateCod:string,hospitalName: string) => {
-  lookupValue.value = stateCod +" "+hospitalName;
+const handleSelectItem = (stateCod: string | number, hospitalName: string) => {
+  lookupValue.value = stateCod + " " + hospitalName;
   isSelected.value = true;
 };
 
 const handleSubmit = (data: Facility) => {
   console.log(data);
-  if (
-    data.hospitalName &&
-    data.reportName &&
-    data.addressNo1 &&
-    data.addressNo2 &&
-    data.city &&
-    data.state &&
-    data.stateCod &&
-    data.npi &&
-    data.id &&
-    data.otherID
-  ) {
-    facilitiesData.value.push(data);
-  }
 };
-
-const filteredData = computed(() => {
-
-  return facilitiesData.value.filter(
-    (item) =>
-      item.stateCod.toLowerCase().includes(lookupValue.value.toLowerCase()) ||
-      item.hospitalName
-        .toLowerCase()
-        .includes(lookupValue.value.toLowerCase()) ||
-      item.city.toLowerCase().includes(lookupValue.value.toLowerCase()) ||
-      item?.state?.toLowerCase().includes(lookupValue.value.toLowerCase())
-  );
-});
 </script>
 
 <style scoped lang="css">

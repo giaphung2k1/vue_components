@@ -13,6 +13,7 @@ import {
   Race,
   ClassSuffix,
   TypeOfInfoPending,
+  HospitalColumn,
 } from "@/types/dataTypes";
 
 const OWALookupData: Array<OWAItem> = [
@@ -219,7 +220,7 @@ const countries: Array<Country> = [
   },
 ];
 
-const doctors:Doctor[] = [
+const doctors: Doctor[] = [
   {
     id: "00000312",
     lastName: "Last",
@@ -265,13 +266,13 @@ const doctors:Doctor[] = [
     specialty: "Doctor",
     addressCityState: "address, city, state",
   },
-]
+];
 
 const columnsDoctor: DoctorColumn[] = [
   {
     key: "id",
     class: "id-cell",
-    title: "ID#"
+    title: "ID#",
   },
   {
     key: "lastName",
@@ -286,7 +287,7 @@ const columnsDoctor: DoctorColumn[] = [
   {
     key: "npi",
     class: "npi-cell",
-    title: "NPI Code"
+    title: "NPI Code",
   },
   {
     key: "licenseNumber",
@@ -303,9 +304,9 @@ const columnsDoctor: DoctorColumn[] = [
     class: "address-city-state-cell",
     title: "Address, City, State",
   },
-]
+];
 
-const displayedColumnsAgent:(keyof Agent)[] = ["code", "description"]
+const displayedColumnsAgent: (keyof Agent)[] = ["code", "description"];
 
 const columnsAgent: AgentColumn[] = [
   {
@@ -316,15 +317,15 @@ const columnsAgent: AgentColumn[] = [
   {
     key: "description",
     class: "description-cell",
-    title: "Description"
-  }
-]
+    title: "Description",
+  },
+];
 
 const columnsFacility: FacilityColumn[] = [
   {
     key: "stateCod",
     class: "state-cod-cell",
-    title: "State Cod"
+    title: "State Cod",
   },
   {
     key: "hospitalName",
@@ -334,71 +335,109 @@ const columnsFacility: FacilityColumn[] = [
   {
     key: "city",
     class: "city-cell",
-    title: "City"
+    title: "City",
   },
   {
     key: "state",
     class: "state-cell",
-    title: "State"
+    title: "State",
   },
-]
+];
 
+const columnsHospital: HospitalColumn[] = [
+  {
+    key: "pincode",
+    class: "state-cod-cell",
+    title: "State Cod",
+  },
+  {
+    key: "hospitalName",
+    class: "hospital-name-cell",
+    title: "Hospital Name",
+  },
+  {
+    key: "bedsAvailable",
+    class: "city-cell",
+    title: "Beds",
+  },
+  {
+    key: "state",
+    class: "state-cell",
+    title: "State",
+  },
+];
 
-const races:Race[] = [
+const races: Race[] = [
   {
     title: "White Please Select",
     value: "1",
-    key: "01"
+    key: "01",
   },
   {
     title: "Black Please Select",
     value: "2",
-    key: "02"
+    key: "02",
   },
-]
+];
 
 const classSuffixs: ClassSuffix[] = [
   {
-    title: "(m) - Multiple synchronus tumors OR Multifocal tumor (differentiated and anaplastic thyroid only)",
+    title:
+      "(m) - Multiple synchronus tumors OR Multifocal tumor (differentiated and anaplastic thyroid only)",
     value: "1",
   },
   {
     title: "(s) - Solitary tumor (differentiated and anaplastic thyroid only)",
     value: "2",
   },
-]
+];
 
 const typesOfInfoPeding: TypeOfInfoPending[] = [
   {
     title: "Staging",
     value: "staging",
-    props: { color:'on_green' }
+    props: { color: "on_green" },
   },
   {
     title: "Biopsy info",
     value: "biopsy",
-    props: { color:'on_green' }
+    props: { color: "on_green" },
   },
   {
     title: "Surgery",
     value: "surgery",
-    props: { color:'on_green' }
+    props: { color: "on_green" },
   },
   {
     title: "Chemotherapy Info",
     value: "chemotherapy",
-    props: { color:'on_green' }
+    props: { color: "on_green" },
   },
   {
     title: "Radiation Info",
     value: "radiation",
-    props: { color:'on_green' }
+    props: { color: "on_green" },
   },
   {
     title: "Home Therapy Info",
     value: "home-therapy",
-    props: { color:'on_green' }
+    props: { color: "on_green" },
   },
 ];
 
-export { OWALookupData, facilities, fakeStateData, headers, countries, doctors, columnsDoctor, columnsAgent, displayedColumnsAgent, columnsFacility, races, classSuffixs, typesOfInfoPeding };
+export {
+  OWALookupData,
+  facilities,
+  fakeStateData,
+  headers,
+  countries,
+  doctors,
+  columnsDoctor,
+  columnsAgent,
+  displayedColumnsAgent,
+  columnsFacility,
+  races,
+  classSuffixs,
+  typesOfInfoPeding,
+  columnsHospital,
+};

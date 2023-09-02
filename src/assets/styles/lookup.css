@@ -231,6 +231,10 @@
 }
 
 .lookup-table {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    z-index: 100;
     border-top-left-radius: 8px !important;
     border-top-right-radius: 8px !important;
     margin-top: 16px;   
@@ -438,3 +442,33 @@
     min-width: 60%;
     width: fit-content;
 }
+
+/* Width of first-column-header and first-coloum are the same */
+.first-column-header {
+    min-width: 120px;
+    max-width: 120px;
+}
+.first-column {
+    width: 120px;
+}
+
+/* Width of second-column-header and second-coloum are the same */
+.second-column-header {
+    min-width: 200px;
+    max-width: 200px;
+}
+.second-column {
+    width: 200px;
+}
+
+
+/* Width of last-column-header is 100%, min-width of last-column-header and last-coloum are the same  */
+.last-column-header {
+    width: 100%;
+    min-width: 200px;
+}
+.last-column {
+    min-width: 200px;
+}
+
+

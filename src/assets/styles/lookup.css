@@ -503,3 +503,9 @@
     width: 200px;
 }
 
+.card-wrapper {
+    padding: 10px;
+    border: 1px rgb(var(--v-theme-on_grey)) solid;
+    margin: 10px;
+    border-radius: 8px;
+}

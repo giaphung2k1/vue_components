@@ -1,5 +1,5 @@
 <template>
-  <section :style="{paddingBottom: '44px'}">
+  <section :style="{ paddingBottom: '44px' }">
     <FacilityLockup />
     <HospitalLookup />
     <OWALookup />
@@ -9,7 +9,7 @@
     <RaceSelect />
     <RaceSelectOneColumn />
     <RaceSelectThreeColumn />
-    
+
     <!-- <ClassSuffixSelect /> -->
     <Pathologic />
     <PhysicalExam />
@@ -30,6 +30,44 @@
     <DateWithMacros />
     <Checkbox />
     <TypeOfInfoPending />
+    <v-row no-gutters>
+      <v-col :cols="6">
+        <div class="card-wrapper">
+          <v-row>
+            <v-col :cols="6">
+              <GridDropdown />
+            </v-col>
+            <v-col :cols="6">
+              <GridDropdown />
+            </v-col>
+            <v-col :cols="6">
+              <GridDropdown />
+            </v-col>
+            <v-col :cols="6">
+              <GridDropdown />
+            </v-col>
+          </v-row>
+        </div>
+      </v-col>
+      <v-col :cols="6">
+        <div class="card-wrapper">
+          <v-row>
+            <v-col :cols="6">
+              <GridDropdown />
+            </v-col>
+            <v-col :cols="6">
+              <GridDropdown />
+            </v-col>
+            <v-col :cols="6">
+              <GridDropdown />
+            </v-col>
+            <v-col :cols="6">
+              <GridDropdown />
+            </v-col>
+          </v-row>
+        </div>
+      </v-col>
+    </v-row>
   </section>
 </template>
 
@@ -58,4 +96,5 @@ import Checkbox from "@/components/Checkbox.vue";
 import TypeOfInfoPending from "@/components/TypeOfInfoPending.vue";
 import HospitalLookup from "@/components/HospitalLookup.vue";
 import CommonLookup from "@/components/CommonLookup.vue";
+import GridDropdown from "@/components/GridDropdown.vue";
 </script>

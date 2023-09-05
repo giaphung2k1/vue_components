@@ -13,12 +13,14 @@
             class="field-with-green-icon"
             :hide-details="true"
             append-inner-icon="mdi-chevron-down"
-            :items="races"
+            :items="newRaces"
             ref="selectRef"
             @update:model-value="selectRef.blur()"
+            item-title="description"
+            item-value="code"
           >
             <template v-slot:selection="{ item }">
-              {{ item.raw.key }} {{ item.raw.title }}
+              {{ item.raw.code }} {{ item.raw.description }}
             </template>
             <template v-slot:item="{ props: itemProps }" >
               <v-list-item v-bind="itemProps" class="option-with-bordered-index" />
@@ -31,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { races } from "@/list/data";
+import { newRaces } from "@/list/data";
 import { VNodeRef } from "vue";
 import { ref } from "vue";
 

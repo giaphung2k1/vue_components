@@ -106,6 +106,11 @@ export interface Race {
   key: string,
 }
 
+export interface NewRace {
+  code: string;
+  description: string;
+}
+
 export interface ClassSuffix {
   title: string,
   value: string,

@@ -14,6 +14,7 @@ import {
   ClassSuffix,
   TypeOfInfoPending,
   HospitalColumn,
+  NewRace,
 } from "@/types/dataTypes";
 
 const OWALookupData: Array<OWAItem> = [
@@ -380,6 +381,21 @@ const races: Race[] = [
   },
 ];
 
+const newRaces: NewRace[] = [
+  {
+    code: "1111",
+    description: "Description 1"
+  },
+  {
+    code: "2222",
+    description: "Description 2"
+  },
+  {
+    code: "3333",
+    description: "Description 3"
+  },
+]
+
 const classSuffixs: ClassSuffix[] = [
   {
     title:
@@ -437,6 +453,7 @@ export {
   displayedColumnsAgent,
   columnsFacility,
   races,
+  newRaces,
   classSuffixs,
   typesOfInfoPeding,
   columnsHospital,

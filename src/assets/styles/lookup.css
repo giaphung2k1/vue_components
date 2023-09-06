@@ -509,3 +509,7 @@
     margin: 10px;
     border-radius: 8px;
 }
+
+.collapse-card-title .v-expansion-panel-title__icon {
+    color: rgb(var(--v-theme-on_green))
+}

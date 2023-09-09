@@ -30,7 +30,26 @@
     <DateWithMacros />
     <Checkbox />
     <TypeOfInfoPending />
-    <CollapseCard />
+    <CollapseCard>
+      <GroupBox title="title here">
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+      </GroupBox>
+      <GroupBox title="title here">
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+        <OncoTextBox label="Last Name" />
+      </GroupBox>
+    </CollapseCard>
   </section>
 </template>
 
@@ -60,4 +79,6 @@ import TypeOfInfoPending from "@/components/TypeOfInfoPending.vue";
 import HospitalLookup from "@/components/HospitalLookup.vue";
 import CommonLookup from "@/components/CommonLookup.vue";
 import CollapseCard from "@/components/CollapseCard.vue";
+import GroupBox from "@/components/GroupBox.vue";
+import OncoTextBox from "@/components/OncoTextBox.vue";
 </script>

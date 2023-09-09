@@ -513,3 +513,8 @@
 .collapse-card-title .v-expansion-panel-title__icon {
     color: rgb(var(--v-theme-on_orange))
 }
+
+.collapse-card-body .v-expansion-panel-text__wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-label class="lookup-label"> Common Lookup </v-label>
+    <v-label class="lookup-label">{{ title }} </v-label>
     <v-row>
       <v-col>
         <div class="table-dropdown-wrapper">
@@ -69,6 +69,7 @@
 import ModalCreateAgent from "./ModalCreateAgent.vue";
 import { ref } from "vue";
 import { computed } from "vue";
+const props = defineProps({ title: { type: String, required: true } });
 
 const testItems = [
   {
@@ -148,15 +149,15 @@ const handleSelectItem = (code: string, description: string) => {
 const filteredData = computed(() => {
   return testItems.filter((item) => {
     return (
-        item.code
-          .toString()
-          .toLowerCase()
-          .includes(lookupValue.value.toLowerCase()) ||
-        item.description
-          .toString()
-          .toLowerCase()
-          .includes(lookupValue.value.toLowerCase())
-      );
+      item.code
+        .toString()
+        .toLowerCase()
+        .includes(lookupValue.value.toLowerCase()) ||
+      item.description
+        .toString()
+        .toLowerCase()
+        .includes(lookupValue.value.toLowerCase())
+    );
   });
 });
 </script>

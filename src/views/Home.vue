@@ -5,10 +5,10 @@
     <OWALookup />
     <DoctorLookup />
     <AgentLookup />
-    <CommonLookup />
-    <RaceSelect />
-    <RaceSelectOneColumn />
-    <RaceSelectThreeColumn />
+    <CommonLookup title="CommonLookup" />
+    <RaceSelect title="RaceSelect"/>
+    <RaceSelectOneColumn title="RaceSelectOneColumn" />
+    <RaceSelectThreeColumn title="RaceSelectThreeColumn"/>
 
     <!-- <ClassSuffixSelect /> -->
     <Pathologic />

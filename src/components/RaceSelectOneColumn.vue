@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-label class="lookup-label">
-      Race One Column
+      {{ title }}
     </v-label>
     <v-row>
       <v-col>
@@ -22,8 +22,11 @@
             <template v-slot:selection="{ item }">
               {{ item.raw.code }} {{ item.raw.description }}
             </template>
-            <template v-slot:item="{ props: itemProps }" >
-              <v-list-item v-bind="itemProps" class="option-with-bordered-index" />
+            <template v-slot:item="{ props: itemProps }">
+              <v-list-item
+                v-bind="itemProps"
+                class="option-with-bordered-index"
+              />
             </template>
           </v-autocomplete>
         </v-responsive>
@@ -37,6 +40,6 @@ import { newRaces } from "@/list/data";
 import { VNodeRef } from "vue";
 import { ref } from "vue";
 
-const selectRef = ref<VNodeRef | undefined>(undefined)
-
+const selectRef = ref<VNodeRef | undefined>(undefined);
+const props = defineProps({ title: { type: String, required: true } });
 </script>

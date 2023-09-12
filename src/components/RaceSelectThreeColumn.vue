@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-label class="lookup-label"> Race Three Column </v-label>
+    <v-label class="lookup-label"> {{ title }} </v-label>
     <v-row>
       <v-col>
         <v-responsive class="text-field-wrapper">
@@ -21,10 +21,7 @@
               {{ item.raw.code }} {{ item.raw.description }}
             </template>
             <template v-slot:item="{ item, props: itemProps }">
-              <v-list-item
-                v-bind="itemProps"
-                class="item-with-columns"
-              >
+              <v-list-item v-bind="itemProps" class="item-with-columns">
                 <template v-slot:title>
                   <div class="item-with-columns">
                     <div class="item-column first-item-column">
@@ -53,4 +50,5 @@ import { VNodeRef } from "vue";
 import { ref } from "vue";
 
 const selectRef = ref<VNodeRef | undefined>(undefined);
+const props = defineProps({ title: { type: String, required: true } });
 </script>

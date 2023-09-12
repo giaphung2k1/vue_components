@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-label class="lookup-label">
-      Race
+      {{ title }}
     </v-label>
     <v-row>
       <v-col>
@@ -40,6 +40,7 @@
 import { races } from "@/list/data";
 import { VNodeRef } from "vue";
 import { ref } from "vue";
+const props = defineProps({ title: { type: String, required: true } });
 
 const selectRef = ref<VNodeRef | undefined>(undefined)
 
